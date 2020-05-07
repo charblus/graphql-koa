@@ -6,10 +6,10 @@ require('./schema/list')
 export const database = () => {
   mongoose.set('debug', true)
 
-  mongoose.connect(config.dbPath)
+  mongoose.connect(config.dbPath, {useNewUrlParser:true})
 
   mongoose.connection.on('disconnected', () => {
-    mongoose.connect(config.dbPath)
+    mongoose.connect(config.dbPath, {useNewUrlParser:true})
   })
   mongoose.connection.on('error', err => {
     console.error(err)

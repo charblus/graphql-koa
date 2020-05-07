@@ -19,5 +19,8 @@
     "koa-router": "^7.4.0",
     "koa-static": "^5.0.0",
     "mongoose": "^5.5.1"
+  },
+  "dependencies": {
+    "graphql": "^15.0.0"
   }
 }

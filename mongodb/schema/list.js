@@ -6,7 +6,7 @@ const ObjectId = Schema.Types.ObjectId
 const ListSchema = new Schema({
   title: String,
   desc: String,
-  date: String,
+  data: String,
   id: String,
   checked: Boolean,
   meta: {
