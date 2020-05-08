@@ -2,6 +2,8 @@ import mongoose from 'mongoose'
 import config from '../config'
 
 require('./schema/list')
+require('./schema/info')
+require('./schema/student')
 
 export const database = () => {
   mongoose.set('debug', true)

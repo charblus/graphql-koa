@@ -1,16 +1,16 @@
 import mongoose from 'mongoose'
 const List = mongoose.model('List')
 import { graphql } from 'graphql';
-import schema from '../graphql/schema';
+// import schema from '../graphql/schema';
 
-export const handleGraphql = async (ctx, next) => {
-  graphql(schema, ctx.request.body)
-  .then((res) => {
-    ctx.body = {
-      data: res
-    }
-  })
-}
+// export const handleGraphql = async (ctx, next) => {
+//   graphql(schema, ctx.request.body)
+//   .then((res) => {
+//     ctx.body = {
+//       data: res
+//     }
+//   })
+// }
 
 // 获取所有数据
 export const getAllList = async (ctx, next) => {
