@@ -1,5 +1,17 @@
 import mongoose from 'mongoose'
 const List = mongoose.model('List')
+import { graphql } from 'graphql';
+import schema from '../graphql/schema';
+
+export const handleGraphql = async (ctx, next) => {
+  graphql(schema, ctx.request.body)
+  .then((res) => {
+    ctx.body = {
+      data: res
+    }
+  })
+}
+
 // 获取所有数据
 export const getAllList = async (ctx, next) => {
   const Lists = await List.find({}).sort({date:-1}) // 数据查询
@@ -116,3 +128,4 @@ export const delOne = async (ctx, next) => {
   	}
   }
 }
+
