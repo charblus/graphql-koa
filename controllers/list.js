@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 const List = mongoose.model('List')
-import { graphql } from 'graphql';
+
 // import schema from '../graphql/schema';
 
 // export const handleGraphql = async (ctx, next) => {

@@ -1,43 +1,32 @@
-'use strict'
-
-import Router from 'koa-router'
 import { graphqlKoa, graphiqlKoa } from 'graphql-server-koa'
+import {saveInfo, fetchInfo} from '../controllers/info'
+import {saveStudent, fetchStudent, fetchStudentDetail} from '../controllers/student'
+import { saveCourse, fetchCourse } from '../controllers/course'
 
-import { addOne, getAllList, editOne, tickOne, delOne } from '../controllers/list'
-import { saveInfo, fetchInfo } from '../controllers/info' // 引入info controller
-import { saveStudent, fetchStudent, fetchStudentDetail } from '../controllers/student' // 引入 student controller
-
-
-module.exports = function () {
-  var router = new Router({
-    prefix: '/api'
-  })
-
-  router.get('/hello', (ctx, next) => {
-    ctx.body = "hello world"
-  });
+import schema from '../graphql/schema'
 
 
-  // 设置每一个路由对应的相对的控制器
-  router.post('/saveinfo', saveInfo)
-        .get('/info', fetchInfo)
+const router = require('koa-router')()
 
-  router.post('/savestudent', saveStudent)
-        .get('/student', fetchStudent)
-        .get('/studentDetail', fetchStudentDetail)
-
-  // 把对请求的处理交给处理器。
-  router.post('/addOne', addOne)
-    .post('/editOne', editOne)
-    .post('/tickOne', tickOne)
-    .post('/delOne', delOne)
-    .get('/getAllList', getAllList)
-    .get('/graphiql', async (ctx, next) => {
-      await graphiqlKoa({ endpointURL: '/graphql' })(ctx, next)
-    })
+router.post('/saveinfo', saveInfo)
+      .get('/info', fetchInfo)
+      .post('/savestudent', saveStudent)
+      .get('/student', fetchStudent)
+      .get('/studentDetail', fetchStudentDetail)
+      .post('/savescourse', saveCourse)
+      .get('/course', fetchCourse)
 
 
 
-  return router
 
-}
+router.post('/graphql', async (ctx, next) => {
+        await graphqlKoa({schema: schema})(ctx, next)
+      })
+      .get('/graphql', async (ctx, next) => {
+        await graphqlKoa({schema: schema})(ctx, next)
+      })
+      .get('/graphiql', async (ctx, next) => {
+        await graphiqlKoa({endpointURL: '/graphql'})(ctx, next)
+      })
+
+module.exports = router

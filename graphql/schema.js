@@ -1,34 +1,20 @@
-// 引入GraphQL各种方法类型
-
 import {
-  graphql,
   GraphQLSchema,
-  GraphQLObjectType,
-  GraphQLString,
-  GraphQLID,
-  GraphQLList,
-  GraphQLNonNull,
-  isOutputType
+  GraphQLObjectType
 } from 'graphql';
 
-import mongoose from 'mongoose'
-const Info = mongoose.model('Info') // 引入Info模块
+import {info, infos} from './info'
+import {course} from './course'
+import {student} from './student'
 
-let count = 0;
-
-
-let schema = new GraphQLSchema({
+export default new GraphQLSchema({
   query: new GraphQLObjectType({
-    name: 'RootQueryType',
+    name: 'Queries',
     fields: {
-      count: {
-        type: GraphQLInt,
-        resolve: function() {
-          return count;
-        }
-      }
+      infos,
+      info,
+      course,
+      student
     }
   })
-});
-
-export default schema;
+})

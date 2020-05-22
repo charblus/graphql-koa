@@ -4,10 +4,11 @@ const Schema = mongoose.Schema
 const ObjectId = Schema.Types.ObjectId
 
 
-const InfoSchema = new Schema({
-  hobby: [String],
-  height: String,
-  weight: Number,
+const CourseSchema = new Schema({
+  title: String,
+  desc: String,
+  page: Number,
+  author: String,
   meta: {
     createdAt: {
       type: Date,
@@ -20,7 +21,7 @@ const InfoSchema = new Schema({
   }
 })
 
-InfoSchema.pre('save', function (next) {
+CourseSchema.pre('save', function (next) {
   if (this.isNew) {
     this.meta.createdAt = this.meta.updatedAt = Date.now()
   } else {
@@ -30,4 +31,4 @@ InfoSchema.pre('save', function (next) {
   next()
 })
 
-mongoose.model('Info', InfoSchema)
+mongoose.model('Course', CourseSchema)
