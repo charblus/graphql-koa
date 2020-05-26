@@ -4,8 +4,17 @@ const Course = mongoose.model('Course')
 
 export const saveCourse = async (ctx, next) => {
   const opts = ctx.request.body
-  
   const course = new Course(opts)
+  
+  const courses = await Course.findOne({title: course.title}).exec()
+  if (courses) {
+    ctx.body = {
+      success: false,
+      msg: '已存在' 
+    }
+    return
+  }
+
   const saveCourse = await course.save()
 
   if (saveCourse) {

@@ -17,8 +17,6 @@ router.post('/saveinfo', saveInfo)
       .get('/course', fetchCourse)
 
 
-
-
 router.post('/graphql', async (ctx, next) => {
         await graphqlKoa({schema: schema})(ctx, next)
       })

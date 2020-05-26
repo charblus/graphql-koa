@@ -36,4 +36,44 @@ GraphQL一种用为你 API 而生的查询语言，2018已经到来，PWA还没�
 ![](https://user-gold-cdn.xitu.io/2018/1/2/160b5927554c21cc?w=962&h=716&f=gif&s=2278918)
 
 
+node start
+1. 查询
+```
+{
+  infos {
+    _id
+    height
+    weight
+    hobby
+    meta {
+      createdAt
+      updatedAt
+    }
+  }
+}
+```
 
+
+2. 变量 --- 单一查询
+QUERY
+```
+query myinfo($id: ID!){
+  info(id: $id) {
+    _id
+    height
+    weight
+    hobby
+    meta {
+      createdAt
+      updatedAt
+    }
+  }
+}
+```
+
+GRAPHQL VARIABLES -- JSON
+```
+{
+  "id": "5eb5249692a5436629baaef5"
+}
+```
